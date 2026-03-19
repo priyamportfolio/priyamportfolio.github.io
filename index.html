@@ -1,1064 +1,359 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Priyam Dhar Dwivedi — Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Priyam Dhar Dwivedi — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#07070a;--s1:#0f0f13;--s2:#15151a;--bd:#1f1f28;
+  --gold:#c9a55c;--gold2:#e3c07e;--gdim:rgba(201,165,92,.1);
+  --t:#eee9e0;--td:#78746e;--tm:#35322e;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--t);font-family:'Outfit',sans-serif;font-weight:300;line-height:1.6;overflow-x:hidden}
 
-    :root {
-      --bg: #0a0a0a;
-      --surface: #111111;
-      --surface2: #1a1a1a;
-      --border: #222222;
-      --gold: #c9a84c;
-      --gold-light: #e8c97a;
-      --text: #f0ece4;
-      --text-dim: #888880;
-      --text-muted: #444440;
-      --accent: #c9a84c;
-    }
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content:space-between;align-items:center;padding:20px 60px;background:rgba(7,7,10,.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--bd)}
+.logo{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:600;letter-spacing:.07em;color:var(--gold);text-decoration:none}
+.nav-ul{display:flex;gap:32px;list-style:none}
+.nav-ul a{color:var(--td);text-decoration:none;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;font-weight:500;transition:color .3s}
+.nav-ul a:hover{color:var(--gold)}
 
-    html { scroll-behavior: smooth; }
+/* HERO */
+#hero{min-height:100vh;display:flex;align-items:center;padding:0 60px;position:relative;overflow:hidden}
+.hbg1{position:absolute;width:650px;height:650px;border-radius:50%;background:radial-gradient(circle,rgba(201,165,92,.07) 0%,transparent 70%);top:-80px;right:-80px;pointer-events:none}
+.hbg2{position:absolute;width:380px;height:380px;border-radius:50%;background:radial-gradient(circle,rgba(201,165,92,.04) 0%,transparent 70%);bottom:60px;left:60px;pointer-events:none}
+.hgrid{position:absolute;inset:0;background-image:linear-gradient(rgba(201,165,92,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(201,165,92,.022) 1px,transparent 1px);background-size:76px 76px;pointer-events:none}
+.hcontent{position:relative;z-index:2;max-width:900px}
+.htag{display:flex;align-items:center;gap:14px;margin-bottom:34px;opacity:0;animation:fu .7s ease .15s forwards}
+.htag-line{width:34px;height:1px;background:var(--gold);opacity:.55}
+.htag span{font-family:'DM Mono',monospace;font-size:.63rem;letter-spacing:.26em;color:var(--gold);text-transform:uppercase}
+h1.hname{font-family:'Cormorant Garamond',serif;font-size:clamp(3.4rem,9vw,8.5rem);font-weight:300;line-height:.95;letter-spacing:-.01em;opacity:0;animation:fu .9s ease .3s forwards}
+h1.hname .hl{display:block;font-weight:700;font-style:italic;color:var(--gold)}
+.hsub{font-family:'Cormorant Garamond',serif;font-size:clamp(.95rem,2vw,1.32rem);font-weight:300;font-style:italic;color:var(--td);margin:28px 0 44px;max-width:500px;line-height:1.65;opacity:0;animation:fu .9s ease .5s forwards}
+.hbtns{display:flex;gap:14px;flex-wrap:wrap;opacity:0;animation:fu .9s ease .7s forwards}
+.btn-g{padding:13px 32px;background:var(--gold);color:#07070a;font-family:'Outfit',sans-serif;font-size:.7rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;transition:all .3s}
+.btn-g:hover{background:var(--gold2);transform:translateY(-2px)}
+.btn-o{padding:13px 32px;border:1px solid var(--bd);color:var(--td);font-family:'Outfit',sans-serif;font-size:.7rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;transition:all .3s}
+.btn-o:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px)}
+.hscroll{position:absolute;bottom:38px;left:60px;display:flex;align-items:center;gap:12px;opacity:0;animation:fi 1s ease 1.1s forwards}
+.hscroll span{font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.2em;color:var(--tm);text-transform:uppercase}
+.dots{display:flex;flex-direction:column;gap:4px}
+.dots i{width:4px;height:4px;border-radius:50%;background:var(--gold);display:block;animation:db 1.4s ease infinite}
+.dots i:nth-child(2){animation-delay:.2s;opacity:.6}
+.dots i:nth-child(3){animation-delay:.4s;opacity:.3}
 
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      line-height: 1.6;
-      overflow-x: hidden;
-      cursor: none;
-    }
+/* SHARED */
+section{padding:108px 60px}
+.slbl{display:flex;align-items:center;gap:12px;margin-bottom:11px}
+.slbl span{font-family:'DM Mono',monospace;font-size:.61rem;letter-spacing:.26em;color:var(--gold);text-transform:uppercase}
+.slbl-line{width:50px;height:1px;background:var(--bd)}
+.stitle{font-family:'Cormorant Garamond',serif;font-size:clamp(1.85rem,4vw,3.2rem);font-weight:600;line-height:1.1;margin-bottom:50px}
+.stitle em{font-style:italic;color:var(--gold)}
 
-    /* Custom cursor */
-    .cursor {
-      width: 8px; height: 8px;
-      background: var(--gold);
-      border-radius: 50%;
-      position: fixed;
-      pointer-events: none;
-      z-index: 9999;
-      transition: transform 0.15s ease;
-      transform: translate(-50%, -50%);
-    }
-    .cursor-ring {
-      width: 32px; height: 32px;
-      border: 1px solid rgba(201,168,76,0.4);
-      border-radius: 50%;
-      position: fixed;
-      pointer-events: none;
-      z-index: 9998;
-      transition: all 0.08s ease;
-      transform: translate(-50%, -50%);
-    }
+/* ABOUT */
+#about{background:var(--s1)}
+.ag{display:grid;grid-template-columns:1.1fr .9fr;gap:76px;align-items:start}
+.atext p{color:var(--td);font-size:.96rem;line-height:1.9;margin-bottom:16px}
+.atext p strong{color:var(--t);font-weight:500}
+.afacts{display:flex;flex-direction:column}
+.af{display:flex;justify-content:space-between;align-items:baseline;padding:16px 0;border-bottom:1px solid var(--bd);gap:16px}
+.afk{font-family:'DM Mono',monospace;font-size:.59rem;letter-spacing:.17em;color:var(--tm);text-transform:uppercase;white-space:nowrap}
+.afv{font-size:.87rem;color:var(--t);text-align:right}
 
-    /* NAV */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0;
-      z-index: 100;
-      padding: 28px 60px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: linear-gradient(to bottom, rgba(10,10,10,0.95), transparent);
-    }
-    .nav-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.3rem;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-      color: var(--gold);
-      text-decoration: none;
-    }
-    .nav-links {
-      display: flex;
-      gap: 40px;
-      list-style: none;
-    }
-    .nav-links a {
-      color: var(--text-dim);
-      text-decoration: none;
-      font-size: 0.78rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      font-weight: 500;
-      transition: color 0.3s;
-    }
-    .nav-links a:hover { color: var(--gold); }
+/* PROJECTS */
+#projects{background:var(--bg)}
+.drive-box{border:1px solid var(--bd);border-top:2px solid var(--gold);background:var(--s1);padding:56px 52px;display:flex;justify-content:space-between;align-items:center;gap:28px;flex-wrap:wrap;position:relative;overflow:hidden}
+.drive-box::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 100% at 85% 50%,rgba(201,165,92,.055),transparent);pointer-events:none}
+.drive-box-left{position:relative;z-index:1}
+.drive-lbl{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.24em;color:var(--gold);text-transform:uppercase;margin-bottom:10px}
+.drive-hdg{font-family:'Cormorant Garamond',serif;font-size:1.55rem;font-style:italic;color:var(--td);line-height:1.4;max-width:420px}
+.drive-link{position:relative;z-index:1;padding:15px 38px;background:var(--gold);color:#07070a;font-family:'Outfit',sans-serif;font-size:.7rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;white-space:nowrap;transition:all .3s}
+.drive-link:hover{background:var(--gold2);transform:translateY(-2px)}
 
-    /* HERO */
-    #hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      padding: 0 60px;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 60% 60% at 70% 40%, rgba(201,168,76,0.06) 0%, transparent 70%),
-        radial-gradient(ellipse 40% 50% at 20% 80%, rgba(201,168,76,0.03) 0%, transparent 60%);
-    }
-    .hero-grid-lines {
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(201,168,76,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(201,168,76,0.03) 1px, transparent 1px);
-      background-size: 80px 80px;
-    }
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      max-width: 900px;
-    }
-    .hero-tag {
-      display: inline-block;
-      font-family: 'DM Mono', monospace;
-      font-size: 0.72rem;
-      letter-spacing: 0.2em;
-      color: var(--gold);
-      text-transform: uppercase;
-      margin-bottom: 32px;
-      opacity: 0;
-      animation: fadeUp 0.8s ease 0.2s forwards;
-    }
-    .hero-tag::before {
-      content: '—— ';
-      opacity: 0.5;
-    }
-    h1.hero-name {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(4rem, 10vw, 9rem);
-      font-weight: 900;
-      line-height: 0.9;
-      letter-spacing: -0.02em;
-      margin-bottom: 8px;
-      opacity: 0;
-      animation: fadeUp 0.9s ease 0.4s forwards;
-    }
-    h1.hero-name span {
-      display: block;
-      color: var(--gold);
-      font-style: italic;
-    }
-    .hero-subtitle {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1rem, 2.5vw, 1.5rem);
-      font-weight: 400;
-      font-style: italic;
-      color: var(--text-dim);
-      margin: 32px 0 48px;
-      max-width: 550px;
-      line-height: 1.5;
-      opacity: 0;
-      animation: fadeUp 0.9s ease 0.6s forwards;
-    }
-    .hero-ctas {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-      opacity: 0;
-      animation: fadeUp 0.9s ease 0.8s forwards;
-    }
-    .btn-primary {
-      padding: 14px 36px;
-      background: var(--gold);
-      color: #0a0a0a;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.8rem;
-      font-weight: 500;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      text-decoration: none;
-      transition: all 0.3s;
-    }
-    .btn-primary:hover {
-      background: var(--gold-light);
-      transform: translateY(-2px);
-    }
-    .btn-outline {
-      padding: 14px 36px;
-      border: 1px solid var(--border);
-      color: var(--text-dim);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.8rem;
-      font-weight: 500;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      text-decoration: none;
-      transition: all 0.3s;
-    }
-    .btn-outline:hover {
-      border-color: var(--gold);
-      color: var(--gold);
-      transform: translateY(-2px);
-    }
-    .hero-scroll {
-      position: absolute;
-      bottom: 48px;
-      right: 60px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 12px;
-      opacity: 0;
-      animation: fadeIn 1s ease 1.2s forwards;
-    }
-    .hero-scroll span {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.2em;
-      color: var(--text-muted);
-      writing-mode: vertical-rl;
-      text-transform: uppercase;
-    }
-    .scroll-line {
-      width: 1px;
-      height: 60px;
-      background: linear-gradient(to bottom, var(--gold), transparent);
-      animation: scrollPulse 2s ease infinite;
-    }
+/* SKILLS */
+#skills{background:var(--s1)}
+.sg{display:grid;grid-template-columns:1fr 2fr;gap:76px}
+.sinp p{color:var(--td);font-size:.93rem;line-height:1.88}
+.scats{display:flex;flex-direction:column;gap:32px}
+.scat h4{font-family:'DM Mono',monospace;font-size:.59rem;letter-spacing:.22em;color:var(--gold);text-transform:uppercase;margin-bottom:13px;padding-bottom:9px;border-bottom:1px solid var(--bd)}
+.spills{display:flex;flex-wrap:wrap;gap:8px}
+.sp{padding:6px 15px;background:var(--bg);border:1px solid var(--bd);font-size:.81rem;color:var(--td);transition:all .3s;cursor:default}
+.sp:hover{background:var(--gdim);border-color:var(--gold);color:var(--t)}
 
-    /* SECTIONS GENERAL */
-    section {
-      padding: 120px 60px;
-    }
-    .section-label {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.72rem;
-      letter-spacing: 0.25em;
-      color: var(--gold);
-      text-transform: uppercase;
-      margin-bottom: 16px;
-    }
-    .section-label::before { content: '01. '; }
-    .section-label.s2::before { content: '02. '; }
-    .section-label.s3::before { content: '03. '; }
-    .section-label.s4::before { content: '04. '; }
-    .section-label.s5::before { content: '05. '; }
-    .section-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.2rem, 5vw, 3.8rem);
-      font-weight: 700;
-      line-height: 1.1;
-      margin-bottom: 60px;
-    }
-    .section-title em {
-      font-style: italic;
-      color: var(--gold);
-    }
-    .divider {
-      width: 100%;
-      height: 1px;
-      background: var(--border);
-    }
+/* EDUCATION */
+#edu{background:var(--bg)}
+.elist{max-width:720px}
+.eitem{display:grid;grid-template-columns:150px 1fr;gap:40px;padding:38px 0;border-bottom:1px solid var(--bd)}
+.eitem:first-child{padding-top:0}
+.eyr{font-family:'DM Mono',monospace;font-size:.63rem;letter-spacing:.15em;color:var(--gold);text-transform:uppercase;padding-top:4px}
+.edeg{font-family:'Cormorant Garamond',serif;font-size:1.28rem;font-weight:600;margin-bottom:5px;line-height:1.3}
+.euni{font-size:.85rem;color:var(--td);font-style:italic;margin-bottom:7px}
+.edesc{font-size:.8rem;color:var(--tm);line-height:1.65}
 
-    /* ABOUT */
-    #about {
-      background: var(--surface);
-      position: relative;
-    }
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: start;
-    }
-    .about-text p {
-      color: var(--text-dim);
-      font-size: 1.05rem;
-      line-height: 1.8;
-      margin-bottom: 20px;
-    }
-    .about-text p strong {
-      color: var(--text);
-      font-weight: 500;
-    }
-    .about-facts {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-    }
-    .fact-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 0;
-      border-bottom: 1px solid var(--border);
-    }
-    .fact-label {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.7rem;
-      letter-spacing: 0.15em;
-      color: var(--text-muted);
-      text-transform: uppercase;
-    }
-    .fact-value {
-      font-size: 0.95rem;
-      color: var(--text);
-      font-weight: 400;
-    }
-    .stat-row {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0;
-      margin-top: 60px;
-      border: 1px solid var(--border);
-    }
-    .stat-item {
-      padding: 32px;
-      border-right: 1px solid var(--border);
-      text-align: center;
-    }
-    .stat-item:last-child { border-right: none; }
-    .stat-num {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.8rem;
-      font-weight: 900;
-      color: var(--gold);
-      line-height: 1;
-      display: block;
-    }
-    .stat-desc {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      margin-top: 8px;
-      display: block;
-    }
+/* CONTACT */
+#contact{background:var(--s1);position:relative;overflow:hidden}
+.cwm{position:absolute;bottom:-80px;right:-10px;font-family:'Cormorant Garamond',serif;font-size:21vw;font-weight:700;color:rgba(201,165,92,.022);line-height:1;pointer-events:none;user-select:none}
+.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:76px;position:relative;z-index:2}
+.cleft p{color:var(--td);font-size:.93rem;line-height:1.88;margin-bottom:38px}
+.clinks{display:flex;flex-direction:column}
+.clink{display:flex;justify-content:space-between;align-items:center;padding:16px 0;border-bottom:1px solid var(--bd);text-decoration:none;color:var(--t);transition:all .3s;gap:10px}
+.clink:hover{color:var(--gold);padding-left:10px}
+.cinfo{display:flex;flex-direction:column;gap:3px}
+.ck{font-family:'DM Mono',monospace;font-size:.55rem;letter-spacing:.2em;color:var(--tm);text-transform:uppercase}
+.cv{font-size:.85rem}
+.carr{color:var(--tm);font-size:.9rem;transition:all .3s}
+.clink:hover .carr{color:var(--gold);transform:translate(3px,-3px)}
+.cform{display:flex;flex-direction:column;gap:16px}
+.fg{display:flex;flex-direction:column;gap:6px}
+.fg label{font-family:'DM Mono',monospace;font-size:.56rem;letter-spacing:.2em;color:var(--tm);text-transform:uppercase}
+.fg input,.fg textarea{background:var(--bg);border:1px solid var(--bd);color:var(--t);padding:12px 15px;font-family:'Outfit',sans-serif;font-size:.87rem;outline:none;transition:border-color .3s;resize:none;width:100%}
+.fg input:focus,.fg textarea:focus{border-color:var(--gold)}
+.fg textarea{height:106px}
+.fbtn{padding:13px 32px;background:transparent;border:1px solid var(--gold);color:var(--gold);font-family:'Outfit',sans-serif;font-size:.7rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;transition:all .3s;align-self:flex-start}
+.fbtn:hover{background:var(--gold);color:#07070a}
 
-    /* PROJECTS */
-    #projects { background: var(--bg); }
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 2px;
-    }
-    .project-card {
-      background: var(--surface);
-      padding: 48px;
-      position: relative;
-      overflow: hidden;
-      transition: background 0.4s;
-      cursor: none;
-    }
-    .project-card:hover { background: var(--surface2); }
-    .project-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0;
-      width: 3px;
-      height: 0;
-      background: var(--gold);
-      transition: height 0.4s ease;
-    }
-    .project-card:hover::before { height: 100%; }
-    .project-num {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.2em;
-      color: var(--text-muted);
-      margin-bottom: 20px;
-      display: block;
-    }
-    .project-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.5rem;
-      font-weight: 700;
-      margin-bottom: 12px;
-      line-height: 1.2;
-      transition: color 0.3s;
-    }
-    .project-card:hover .project-title { color: var(--gold); }
-    .project-desc {
-      color: var(--text-dim);
-      font-size: 0.9rem;
-      line-height: 1.7;
-      margin-bottom: 28px;
-    }
-    .project-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-    .tag {
-      padding: 4px 12px;
-      border: 1px solid var(--border);
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.1em;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      transition: all 0.3s;
-    }
-    .project-card:hover .tag {
-      border-color: rgba(201,168,76,0.3);
-      color: var(--gold);
-    }
-    .project-arrow {
-      position: absolute;
-      bottom: 48px; right: 48px;
-      font-size: 1.5rem;
-      color: var(--text-muted);
-      transition: all 0.3s;
-      opacity: 0;
-    }
-    .project-card:hover .project-arrow {
-      opacity: 1;
-      color: var(--gold);
-      transform: translate(4px, -4px);
-    }
+/* FOOTER */
+footer{background:var(--bg);padding:28px 60px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--bd)}
+footer p{font-family:'DM Mono',monospace;font-size:.57rem;letter-spacing:.15em;color:var(--tm);text-transform:uppercase}
+footer span{color:var(--gold)}
 
-    /* SKILLS */
-    #skills { background: var(--surface); }
-    .skills-layout {
-      display: grid;
-      grid-template-columns: 1fr 2fr;
-      gap: 80px;
-    }
-    .skills-intro p {
-      color: var(--text-dim);
-      font-size: 1rem;
-      line-height: 1.8;
-    }
-    .skills-categories {
-      display: flex;
-      flex-direction: column;
-      gap: 40px;
-    }
-    .skill-category h3 {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.7rem;
-      letter-spacing: 0.2em;
-      color: var(--gold);
-      text-transform: uppercase;
-      margin-bottom: 16px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid var(--border);
-    }
-    .skill-pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-    .skill-pill {
-      padding: 8px 18px;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      font-size: 0.85rem;
-      color: var(--text-dim);
-      transition: all 0.3s;
-    }
-    .skill-pill:hover {
-      background: rgba(201,168,76,0.08);
-      border-color: var(--gold);
-      color: var(--text);
-    }
+/* ANIMATIONS */
+@keyframes fu{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fi{from{opacity:0}to{opacity:1}}
+@keyframes db{0%,100%{transform:translateY(0);opacity:1}50%{transform:translateY(-4px);opacity:.4}}
+.rv{opacity:0;transform:translateY(28px);transition:opacity .72s ease,transform .72s ease}
+.rv.on{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
 
-    /* RESUME */
-    #resume { background: var(--bg); }
-    .resume-layout {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-    }
-    .resume-col h3 {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.7rem;
-      letter-spacing: 0.2em;
-      color: var(--gold);
-      text-transform: uppercase;
-      margin-bottom: 32px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid var(--border);
-    }
-    .timeline {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-    }
-    .timeline-item {
-      padding: 28px 0;
-      border-bottom: 1px solid var(--border);
-      position: relative;
-      padding-left: 20px;
-    }
-    .timeline-item::before {
-      content: '';
-      position: absolute;
-      left: 0; top: 36px;
-      width: 6px; height: 6px;
-      background: var(--gold);
-      border-radius: 50%;
-    }
-    .timeline-date {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.15em;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      margin-bottom: 6px;
-    }
-    .timeline-title {
-      font-size: 1rem;
-      font-weight: 500;
-      margin-bottom: 4px;
-      color: var(--text);
-    }
-    .timeline-org {
-      font-size: 0.85rem;
-      color: var(--text-dim);
-      margin-bottom: 8px;
-      font-style: italic;
-    }
-    .timeline-desc {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      line-height: 1.6;
-    }
-    .resume-download {
-      margin-top: 60px;
-      padding: 40px;
-      border: 1px solid var(--border);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: var(--surface);
-      transition: border-color 0.3s;
-    }
-    .resume-download:hover {
-      border-color: var(--gold);
-    }
-    .resume-download p {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.2rem;
-      font-style: italic;
-      color: var(--text-dim);
-    }
-    .resume-download a {
-      padding: 12px 28px;
-      background: var(--gold);
-      color: #0a0a0a;
-      font-size: 0.75rem;
-      font-weight: 500;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      text-decoration: none;
-      transition: background 0.3s;
-      white-space: nowrap;
-    }
-    .resume-download a:hover { background: var(--gold-light); }
-
-    /* CONTACT */
-    #contact {
-      background: var(--surface);
-      position: relative;
-      overflow: hidden;
-    }
-    #contact::before {
-      content: 'HELLO';
-      position: absolute;
-      bottom: -60px; right: -30px;
-      font-family: 'Playfair Display', serif;
-      font-size: 20vw;
-      font-weight: 900;
-      color: rgba(201,168,76,0.03);
-      line-height: 1;
-      pointer-events: none;
-      user-select: none;
-    }
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      position: relative;
-      z-index: 2;
-    }
-    .contact-left p {
-      color: var(--text-dim);
-      font-size: 1rem;
-      line-height: 1.8;
-      margin-bottom: 40px;
-    }
-    .contact-links {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-    }
-    .contact-link {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 0;
-      border-bottom: 1px solid var(--border);
-      text-decoration: none;
-      color: var(--text);
-      transition: all 0.3s;
-      group: true;
-    }
-    .contact-link:hover { color: var(--gold); padding-left: 12px; }
-    .contact-link-label {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.2em;
-      color: var(--text-muted);
-      text-transform: uppercase;
-    }
-    .contact-link-value {
-      font-size: 0.95rem;
-    }
-    .contact-link span:last-child {
-      opacity: 0;
-      transform: translateX(-8px);
-      transition: all 0.3s;
-    }
-    .contact-link:hover span:last-child {
-      opacity: 1;
-      transform: translateX(0);
-      color: var(--gold);
-    }
-    .contact-form {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-    .form-group label {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.2em;
-      color: var(--text-muted);
-      text-transform: uppercase;
-    }
-    .form-group input,
-    .form-group textarea {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      color: var(--text);
-      padding: 14px 18px;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.95rem;
-      outline: none;
-      transition: border-color 0.3s;
-      resize: none;
-    }
-    .form-group input:focus,
-    .form-group textarea:focus {
-      border-color: var(--gold);
-    }
-    .form-group textarea { height: 120px; }
-    .form-submit {
-      padding: 16px 40px;
-      background: transparent;
-      border: 1px solid var(--gold);
-      color: var(--gold);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.8rem;
-      font-weight: 500;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      cursor: none;
-      transition: all 0.3s;
-      align-self: flex-start;
-    }
-    .form-submit:hover {
-      background: var(--gold);
-      color: #0a0a0a;
-    }
-
-    /* FOOTER */
-    footer {
-      background: var(--bg);
-      padding: 40px 60px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-top: 1px solid var(--border);
-    }
-    footer p {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.15em;
-      color: var(--text-muted);
-      text-transform: uppercase;
-    }
-    footer span {
-      color: var(--gold);
-    }
-
-    /* ANIMATIONS */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to   { opacity: 1; }
-    }
-    @keyframes scrollPulse {
-      0%, 100% { opacity: 0.4; }
-      50%       { opacity: 1; }
-    }
-
-    /* REVEAL ON SCROLL */
-    .reveal {
-      opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
-    }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .reveal-delay-1 { transition-delay: 0.1s; }
-    .reveal-delay-2 { transition-delay: 0.2s; }
-    .reveal-delay-3 { transition-delay: 0.3s; }
-
-    /* RESPONSIVE */
-    @media (max-width: 900px) {
-      nav { padding: 24px 30px; }
-      section { padding: 80px 30px; }
-      #hero { padding: 0 30px; }
-      .about-grid,
-      .projects-grid,
-      .skills-layout,
-      .resume-layout,
-      .contact-grid { grid-template-columns: 1fr; gap: 40px; }
-      .nav-links { display: none; }
-      footer { padding: 30px; flex-direction: column; gap: 12px; text-align: center; }
-    }
-  </style>
+/* RESPONSIVE */
+@media(max-width:820px){
+  nav{padding:18px 22px}
+  .nav-ul{display:none}
+  section{padding:72px 22px}
+  #hero{padding:0 22px}
+  .ag,.sg,.cgrid{grid-template-columns:1fr;gap:40px}
+  .eitem{grid-template-columns:1fr;gap:5px}
+  footer{padding:22px;flex-direction:column;gap:9px;text-align:center}
+  .hscroll{left:22px}
+  .drive-box{padding:36px 28px;flex-direction:column;align-items:flex-start}
+}
+</style>
 </head>
 <body>
 
-  <!-- Cursor -->
-  <div class="cursor" id="cursor"></div>
-  <div class="cursor-ring" id="cursorRing"></div>
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="logo">Priyam Dhar Dwivedi</a>
+  <ul class="nav-ul">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#edu">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
 
-  <!-- NAV -->
-  <nav>
-    <a href="#hero" class="nav-logo">Priyam Dhar Dwivedi</a>
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#resume">Resume</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
+<!-- HERO -->
+<section id="hero">
+  <div class="hbg1"></div>
+  <div class="hbg2"></div>
+  <div class="hgrid"></div>
+  <div class="hcontent">
+    <div class="htag">
+      <div class="htag-line"></div>
+      <span>Communications · Media · Marketing</span>
+    </div>
+    <h1 class="hname">
+      Priyam Dhar
+      <span class="hl">Dwivedi.</span>
+    </h1>
+    <p class="hsub">Crafting narratives that move people — through strategy, storytelling, and sharp media analysis.</p>
+    <div class="hbtns">
+      <a href="#projects" class="btn-g">View My Work</a>
+      <a href="#contact" class="btn-o">Get In Touch</a>
+    </div>
+  </div>
+  <div class="hscroll">
+    <div class="dots"><i></i><i></i><i></i></div>
+    <span>Scroll to explore</span>
+  </div>
+</section>
 
-  <!-- HERO -->
-  <section id="hero">
-    <div class="hero-bg"></div>
-    <div class="hero-grid-lines"></div>
-    <div class="hero-content">
-      <span class="hero-tag">Communications · Media · Marketing</span>
-      <h1 class="hero-name">
-        Priyam Dhar Dwivedi
-        <span>Portfolio.</span>
-      </h1>
-      <p class="hero-subtitle">
-        Crafting narratives that move people — through strategy, storytelling, and sharp analysis.
-      </p>
-      <div class="hero-ctas">
-        <a href="#projects" class="btn-primary">View My Work</a>
-        <a href="#contact" class="btn-outline">Get In Touch</a>
+<!-- ABOUT -->
+<section id="about">
+  <div class="slbl rv"><span>01 — About</span><div class="slbl-line"></div></div>
+  <div class="ag">
+    <div>
+      <h2 class="stitle rv">Storyteller.<br><em>Strategist.</em></h2>
+      <div class="atext rv d1">
+        <p>I'm <strong>Priyam Dhar Dwivedi</strong> — a communications and media professional passionate about the intersection of narrative and strategy. I believe the right message, delivered well, can change minds and move markets.</p>
+        <p>My work spans <strong>content creation, marketing strategy, media analysis,</strong> and <strong>brand communications</strong> — always grounded in data and driven by story.</p>
+        <p>Currently pursuing my Master's at IIMC, deepening expertise in media business and strategic communications.</p>
       </div>
     </div>
-    <div class="hero-scroll">
-      <div class="scroll-line"></div>
-      <span>Scroll</span>
+    <div class="afacts rv d2">
+      <div class="af"><span class="afk">Based in</span><span class="afv">New Delhi, India</span></div>
+      <div class="af"><span class="afk">Specialization</span><span class="afv">Communications & Media</span></div>
+      <div class="af"><span class="afk">Focus Areas</span><span class="afv">Marketing, Strategy, Analysis</span></div>
+      <div class="af"><span class="afk">Availability</span><span class="afv">Open to Opportunities</span></div>
+      <div class="af"><span class="afk">Languages</span><span class="afv">English, Hindi</span></div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ABOUT -->
-  <section id="about">
-    <div class="section-label reveal">About</div>
-    <div class="about-grid">
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="slbl rv"><span>02 — Projects</span><div class="slbl-line"></div></div>
+  <h2 class="stitle rv">Selected <em>Work.</em></h2>
+  <div class="drive-box rv">
+    <div class="drive-box-left">
+      <div class="drive-lbl">Full Portfolio</div>
+      <div class="drive-hdg">Browse the complete collection of my work and projects on Google Drive</div>
+    </div>
+    <a href="https://drive.google.com/drive/folders/12rb6Ebzwd3Zq1emuL0iRr_yepNHznIKn" target="_blank" class="drive-link">Open Drive Folder ↗</a>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="slbl rv"><span>03 — Skills</span><div class="slbl-line"></div></div>
+  <div class="sg">
+    <div class="sinp">
+      <h2 class="stitle rv" style="margin-bottom:18px;">What I<br><em>Bring.</em></h2>
+      <p class="rv d1">A blend of creative instinct and analytical rigour — sharpened across communications, media, and marketing.</p>
+    </div>
+    <div class="scats">
+      <div class="scat rv">
+        <h4>Communications & PR</h4>
+        <div class="spills">
+          <span class="sp">Strategic Messaging</span><span class="sp">Media Relations</span>
+          <span class="sp">Press Releases</span><span class="sp">Crisis Communications</span>
+          <span class="sp">Stakeholder Management</span>
+        </div>
+      </div>
+      <div class="scat rv d1">
+        <h4>Marketing & Content</h4>
+        <div class="spills">
+          <span class="sp">Content Strategy</span><span class="sp">Copywriting</span>
+          <span class="sp">Social Media</span><span class="sp">SEO Basics</span>
+          <span class="sp">Email Marketing</span><span class="sp">Campaign Planning</span>
+        </div>
+      </div>
+      <div class="scat rv d2">
+        <h4>Analysis & Research</h4>
+        <div class="spills">
+          <span class="sp">Media Monitoring</span><span class="sp">Audience Research</span>
+          <span class="sp">Sentiment Analysis</span><span class="sp">Competitive Analysis</span>
+          <span class="sp">Report Writing</span>
+        </div>
+      </div>
+      <div class="scat rv d3">
+        <h4>Tools & Platforms</h4>
+        <div class="spills">
+          <span class="sp">Google Analytics</span><span class="sp">Canva</span>
+          <span class="sp">Hootsuite</span><span class="sp">Microsoft Office</span>
+          <span class="sp">WordPress</span><span class="sp">Meltwater</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="edu">
+  <div class="slbl rv"><span>04 — Education</span><div class="slbl-line"></div></div>
+  <h2 class="stitle rv"><em>Education.</em></h2>
+  <div class="elist">
+    <div class="eitem rv">
+      <div class="eyr">2025 — 2027</div>
       <div>
-        <h2 class="section-title reveal">Storyteller.<br><em>Strategist.</em></h2>
-        <div class="about-text reveal reveal-delay-1">
-          <p>I'm <strong>Priyam Dhar Dwivedi</strong> — a communications and media professional passionate about the intersection of narrative and strategy. I believe the right message, delivered well, can change minds and move markets.</p>
-          <p>My work spans <strong>content creation, marketing strategy, media analysis,</strong> and <strong>brand communications</strong> — always grounded in data and driven by story.</p>
-          <p>When I'm not crafting campaigns or dissecting media trends, I'm exploring how emerging technologies are reshaping the communications landscape.</p>
-        </div>
+        <div class="edeg">Master's in Media Business Studies</div>
+        <div class="euni">Indian Institute of Mass Communication, New Delhi, India</div>
+        <div class="edesc">Specializing in media management, business strategy, and the evolving landscape of the communications industry.</div>
       </div>
+    </div>
+    <div class="eitem rv d1">
+      <div class="eyr">2021 — 2024</div>
       <div>
-        <div class="about-facts reveal reveal-delay-2">
-          <div class="fact-row">
-            <span class="fact-label">Based in</span>
-            <span class="fact-value">New Delhi, India</span>
-          </div>
-          <div class="fact-row">
-            <span class="fact-label">Specialization</span>
-            <span class="fact-value">Communications & Media</span>
-          </div>
-          <div class="fact-row">
-            <span class="fact-label">Focus Areas</span>
-            <span class="fact-value">Marketing, Strategy, Analysis</span>
-          </div>
-          <div class="fact-row">
-            <span class="fact-label">Availability</span>
-            <span class="fact-value">Open to Opportunities</span>
-          </div>
-          <div class="fact-row">
-            <span class="fact-label">Languages</span>
-            <span class="fact-value">English, Hindi</span>
-          </div>
-        </div>
-
+        <div class="edeg">Bachelor's in Arts</div>
+        <div class="euni">University of Allahabad, Prayagraj, India</div>
+        <div class="edesc">Foundation in humanities, critical thinking, and communications. Developed strong analytical and writing skills.</div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- PROJECTS -->
-  <section id="projects">
-    <div class="section-label s2 reveal">Projects</div>
-    <h2 class="section-title reveal">Selected <em>Work.</em></h2>
-    <div class="projects-grid">
-      <div class="project-card reveal">
-        <span class="project-num">001</span>
-        <h3 class="project-title">Brand Campaign Strategy</h3>
-        <p class="project-desc">Developed an end-to-end communications strategy for a consumer brand, including audience research, messaging framework, and multi-channel execution plan that increased engagement by 40%.</p>
-        <div class="project-tags">
-          <span class="tag">Strategy</span>
-          <span class="tag">Branding</span>
-          <span class="tag">Research</span>
-        </div>
-        <span class="project-arrow">↗</span>
-      </div>
-      <div class="project-card reveal reveal-delay-1">
-        <span class="project-num">002</span>
-        <h3 class="project-title">Media Analysis Report</h3>
-        <p class="project-desc">Conducted a comprehensive analysis of media coverage trends across digital and print platforms, identifying key narratives and sentiment shifts in a fast-moving news cycle.</p>
-        <div class="project-tags">
-          <span class="tag">Media</span>
-          <span class="tag">Analysis</span>
-          <span class="tag">Data</span>
-        </div>
-        <span class="project-arrow">↗</span>
-      </div>
-      <div class="project-card reveal reveal-delay-2">
-        <span class="project-num">003</span>
-        <h3 class="project-title">Social Media Marketing</h3>
-        <p class="project-desc">Led social media strategy and content creation for an organization's digital platforms, growing follower base and improving content reach through targeted storytelling and analytics.</p>
-        <div class="project-tags">
-          <span class="tag">Social Media</span>
-          <span class="tag">Content</span>
-          <span class="tag">Growth</span>
-        </div>
-        <span class="project-arrow">↗</span>
-      </div>
-      <div class="project-card reveal reveal-delay-3">
-        <span class="project-num">004</span>
-        <h3 class="project-title">Strategic Communications Plan</h3>
-        <p class="project-desc">Authored a strategic communications plan for a non-profit, defining key messages, stakeholder mapping, and a crisis communications framework to protect and enhance reputation.</p>
-        <div class="project-tags">
-          <span class="tag">PR</span>
-          <span class="tag">Crisis Comms</span>
-          <span class="tag">Non-profit</span>
-        </div>
-        <span class="project-arrow">↗</span>
+<!-- CONTACT -->
+<section id="contact">
+  <div class="cwm">Hello</div>
+  <div class="slbl rv"><span>05 — Contact</span><div class="slbl-line"></div></div>
+  <h2 class="stitle rv">Let's <em>Connect.</em></h2>
+  <div class="cgrid">
+    <div class="cleft rv">
+      <p>Whether you have a project in mind, a collaboration to explore, or just want to say hello — I'd love to hear from you.</p>
+      <div class="clinks">
+        <a href="mailto:dwivedipriyam2003@gmail.com" class="clink">
+          <div class="cinfo"><span class="ck">Email</span><span class="cv">dwivedipriyam2003@gmail.com</span></div>
+          <span class="carr">↗</span>
+        </a>
+        <a href="https://linkedin.com/in/priyam-dhar-dwivedi" target="_blank" class="clink">
+          <div class="cinfo"><span class="ck">LinkedIn</span><span class="cv">linkedin.com/in/priyam-dhar-dwivedi</span></div>
+          <span class="carr">↗</span>
+        </a>
+        <a href="https://github.com/priyamportfolio" target="_blank" class="clink">
+          <div class="cinfo"><span class="ck">GitHub</span><span class="cv">github.com/priyamportfolio</span></div>
+          <span class="carr">↗</span>
+        </a>
       </div>
     </div>
-    <!-- Drive Link Section -->
-    <div class="drive-section reveal" style="margin-top: 40px; padding: 48px; background: var(--surface); border: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px;">
-      <div>
-        <div style="font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; margin-bottom: 10px;">All Projects</div>
-        <p style="font-family: 'Playfair Display', serif; font-size: 1.3rem; font-style: italic; color: var(--text-dim);">View the complete collection of my work on Google Drive</p>
-      </div>
-      <a href="https://drive.google.com/drive/folders/12rb6Ebzwd3Zq1emuL0iRr_yepNHznIKn" target="_blank" style="padding: 16px 36px; background: var(--gold); color: #0a0a0a; font-family: 'DM Sans', sans-serif; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none; transition: background 0.3s; white-space: nowrap;" onmouseover="this.style.background='#e8c97a'" onmouseout="this.style.background='#c9a84c'">Open Drive Folder ↗</a>
+    <div class="cform rv d1">
+      <div class="fg"><label>Your Name</label><input type="text" placeholder="Jane Smith"/></div>
+      <div class="fg"><label>Your Email</label><input type="email" placeholder="jane@example.com"/></div>
+      <div class="fg"><label>Message</label><textarea placeholder="Tell me about your project..."></textarea></div>
+      <button class="fbtn" id="sb">Send Message →</button>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- SKILLS -->
-  <section id="skills">
-    <div class="section-label s3 reveal">Skills</div>
-    <div class="skills-layout">
-      <div class="skills-intro">
-        <h2 class="section-title reveal" style="margin-bottom:24px;">What I<br><em>Bring.</em></h2>
-        <p class="reveal reveal-delay-1">A blend of creative instinct and analytical rigor — tools and techniques sharpened across communications, media, and marketing.</p>
-      </div>
-      <div class="skills-categories">
-        <div class="skill-category reveal">
-          <h3>Communications & PR</h3>
-          <div class="skill-pills">
-            <span class="skill-pill">Strategic Messaging</span>
-            <span class="skill-pill">Media Relations</span>
-            <span class="skill-pill">Press Releases</span>
-            <span class="skill-pill">Crisis Communications</span>
-            <span class="skill-pill">Stakeholder Management</span>
-          </div>
-        </div>
-        <div class="skill-category reveal reveal-delay-1">
-          <h3>Marketing & Content</h3>
-          <div class="skill-pills">
-            <span class="skill-pill">Content Strategy</span>
-            <span class="skill-pill">Copywriting</span>
-            <span class="skill-pill">Social Media</span>
-            <span class="skill-pill">SEO Basics</span>
-            <span class="skill-pill">Email Marketing</span>
-            <span class="skill-pill">Campaign Planning</span>
-          </div>
-        </div>
-        <div class="skill-category reveal reveal-delay-2">
-          <h3>Analysis & Research</h3>
-          <div class="skill-pills">
-            <span class="skill-pill">Media Monitoring</span>
-            <span class="skill-pill">Audience Research</span>
-            <span class="skill-pill">Sentiment Analysis</span>
-            <span class="skill-pill">Competitive Analysis</span>
-            <span class="skill-pill">Report Writing</span>
-          </div>
-        </div>
-        <div class="skill-category reveal reveal-delay-3">
-          <h3>Tools & Platforms</h3>
-          <div class="skill-pills">
-            <span class="skill-pill">Google Analytics</span>
-            <span class="skill-pill">Canva</span>
-            <span class="skill-pill">Hootsuite</span>
-            <span class="skill-pill">Microsoft Office</span>
-            <span class="skill-pill">WordPress</span>
-            <span class="skill-pill">Meltwater</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+<!-- FOOTER -->
+<footer>
+  <p>&#169; 2026 <span>Priyam Dhar Dwivedi</span>. All rights reserved.</p>
+  <p>Hosted on <span>GitHub Pages</span></p>
+</footer>
 
-  <!-- RESUME -->
-  <section id="resume">
-    <div class="section-label s4 reveal">Resume</div>
-    <h2 class="section-title reveal"><em>Education.</em></h2>
-    <div class="resume-layout" style="grid-template-columns: 1fr;">
-      <div class="resume-col reveal">
-        <h3>Education</h3>
-        <div class="timeline">
-          <div class="timeline-item">
-            <div class="timeline-date">2025 — 2027</div>
-            <div class="timeline-title">Master's in Media Business Studies</div>
-            <div class="timeline-org">Indian Institute of Mass Communication</div>
-            <div class="timeline-desc">Specializing in media management, business strategy, and the evolving landscape of the communications industry.</div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-date">2021 — 2024</div>
-            <div class="timeline-title">Bachelor's in Arts</div>
-            <div class="timeline-org">University of Allahabad</div>
-            <div class="timeline-desc">Foundation in humanities, critical thinking, and communications. Developed strong analytical and writing skills.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="resume-download reveal">
-      <p>Want the full picture? Download my resume.</p>
-      <a href="resume.pdf" download>Download CV ↓</a>
-    </div>
-  </section>
+<script>
+  // Scroll reveal
+  const els = document.querySelectorAll('.rv');
+  const ob = new IntersectionObserver(en => {
+    en.forEach(e => { if(e.isIntersecting){e.target.classList.add('on');ob.unobserve(e.target);} });
+  },{threshold:0.08});
+  els.forEach(el => ob.observe(el));
 
-  <!-- CONTACT -->
-  <section id="contact">
-    <div class="section-label s5 reveal">Contact</div>
-    <h2 class="section-title reveal">Let's <em>Connect.</em></h2>
-    <div class="contact-grid">
-      <div class="contact-left reveal">
-        <p>Whether you have a project in mind, a collaboration to explore, or just want to say hello — I'd love to hear from you.</p>
-        <div class="contact-links">
-          <a href="mailto:dwivedipriyam2003@gmail.com" class="contact-link">
-            <span class="contact-link-label">Email</span>
-            <span class="contact-link-value">dwivedipriyam2003@gmail.com</span>
-            <span>↗</span>
-          </a>
-          <a href="https://linkedin.com/in/priyam-dhar-dwivedi" target="_blank" class="contact-link">
-            <span class="contact-link-label">LinkedIn</span>
-            <span class="contact-link-value">linkedin.com/in/priyam-dhar-dwivedi</span>
-            <span>↗</span>
-          </a>
-          <a href="https://github.com/priyamportfolio" target="_blank" class="contact-link">
-            <span class="contact-link-label">GitHub</span>
-            <span class="contact-link-value">github.com/priyamportfolio</span>
-            <span>↗</span>
-          </a>
-        </div>
-      </div>
-      <div class="contact-form reveal reveal-delay-1">
-        <div class="form-group">
-          <label>Your Name</label>
-          <input type="text" placeholder="Jane Smith" />
-        </div>
-        <div class="form-group">
-          <label>Your Email</label>
-          <input type="email" placeholder="jane@example.com" />
-        </div>
-        <div class="form-group">
-          <label>Message</label>
-          <textarea placeholder="Tell me about your project..."></textarea>
-        </div>
-        <button class="form-submit">Send Message →</button>
-      </div>
-    </div>
-  </section>
+  // Nav highlight
+  const ss = document.querySelectorAll('section[id]');
+  const na = document.querySelectorAll('.nav-ul a');
+  window.addEventListener('scroll',()=>{
+    let c='';
+    ss.forEach(s=>{if(window.scrollY>=s.offsetTop-160)c=s.id;});
+    na.forEach(a=>{a.style.color=a.getAttribute('href')==='#'+c?'var(--gold)':'';});
+  });
 
-  <!-- FOOTER -->
-  <footer>
-    <p>© 2026 <span>Priyam Dhar Dwivedi</span>. All rights reserved.</p>
-    <p>Built with <span>♥</span> — hosted on GitHub Pages</p>
-  </footer>
-
-  <!-- JS -->
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-    // Cursor
-    const cursor = document.getElementById('cursor');
-    const ring = document.getElementById('cursorRing');
-    let mx = 0, my = 0, rx = 0, ry = 0;
-    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
-    function animCursor() {
-      cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
-      rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
-      ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
-      requestAnimationFrame(animCursor);
+  // Form
+  document.getElementById('sb').addEventListener('click',function(){
+    const inp=document.querySelectorAll('.cform input,.cform textarea');
+    let ok=true;
+    inp.forEach(i=>{if(!i.value.trim()){i.style.borderColor='var(--gold)';ok=false;}else i.style.borderColor='';});
+    if(ok){
+      this.textContent='Sent ✓';
+      this.style.background='var(--gold)';
+      this.style.color='#07070a';
+      setTimeout(()=>{this.textContent='Send Message →';this.style.background='';this.style.color='';inp.forEach(i=>i.value='');},3000);
     }
-    animCursor();
-    document.querySelectorAll('a, button, .project-card, .skill-pill').forEach(el => {
-      el.addEventListener('mouseenter', () => { cursor.style.transform = 'translate(-50%,-50%) scale(2.5)'; ring.style.transform = 'translate(-50%,-50%) scale(1.5)'; });
-      el.addEventListener('mouseleave', () => { cursor.style.transform = 'translate(-50%,-50%) scale(1)'; ring.style.transform = 'translate(-50%,-50%) scale(1)'; });
-    });
-
-    // Reveal on scroll
-    const reveals = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }});
-    }, { threshold: 0.12 });
-    reveals.forEach(el => observer.observe(el));
-
-    // Active nav link
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav-links a');
-    window.addEventListener('scroll', () => {
-      let cur = '';
-      sections.forEach(s => { if (window.scrollY >= s.offsetTop - 200) cur = s.id; });
-      navLinks.forEach(a => {
-        a.style.color = a.getAttribute('href') === '#' + cur ? 'var(--gold)' : '';
-      });
-    });
-
-    // Contact form (basic handler)
-    document.querySelector('.form-submit').addEventListener('click', function() {
-      const inputs = document.querySelectorAll('.contact-form input, .contact-form textarea');
-      let filled = true;
-      inputs.forEach(i => { if (!i.value.trim()) { i.style.borderColor = '#c9a84c'; filled = false; } else i.style.borderColor = ''; });
-      if (filled) {
-        this.textContent = 'Message Sent ✓';
-        this.style.background = 'var(--gold)';
-        thi
+  });
+</script>
+</body>
+</html>
